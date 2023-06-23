@@ -1,2 +1,6 @@
 Pass of Atlas -->
 mongoData00base
+
+https://stackoverflowbackend-oucf.onrender.com
+
+stackover-souzef-low.netlify.app
