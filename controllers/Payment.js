@@ -47,7 +47,9 @@ export const paymentVerification = async (req, res) => {
         razorpay_signature,
       });
 
-      res.redirect(`http://localhost:5173/paymentsuccess?reference=${razorpay_payment_id}`);
+      res.redirect(
+        `stackover-souzef-low.netlify.app/paymentsuccess?reference=${razorpay_payment_id}`
+      );
     }
   } catch (error) {
     console.log(error);
