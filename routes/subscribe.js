@@ -7,7 +7,7 @@ import { subscriptionType, validationCheck } from "../controllers/subscriptions.
 // middleware
 
 // Routes
-router.post("/verify", subscriptionType);
-router.post("/validity", validationCheck);
+router.patch("/verify", subscriptionType);
+router.patch("/validity", validationCheck);
 
 export default router;

@@ -3,7 +3,9 @@ import users from "../models/auth.js";
 
 export const subscriptionType = async (req, res) => {
   const amount = req.body.amount;
+  console.log(amount);
   const _id = req.body.id;
+  console.log(_id);
   try {
     if (amount == 100) {
       var type = "Silver";
@@ -16,7 +18,7 @@ export const subscriptionType = async (req, res) => {
       var attempts = 1;
     }
 
-    await users.findByIdAndUpdate(
+    const update = await users.findByIdAndUpdate(
       _id,
       { $set: { "subscription.pack_type": type, "subscription.attempts": attempts } },
       { new: true }
@@ -25,6 +27,7 @@ export const subscriptionType = async (req, res) => {
     res.status(200).json({
       type,
       amount,
+      update,
     });
   } catch (error) {
     console.log(error);
@@ -33,7 +36,7 @@ export const subscriptionType = async (req, res) => {
 
 export const validationCheck = async (req, res) => {
   const _id = req.body.id;
-
+  console.log(_id);
   try {
     const existingUser = await users.findOne({ _id });
 
@@ -42,6 +45,7 @@ export const validationCheck = async (req, res) => {
     }
 
     const packageDetails = existingUser.subscription;
+    console.log(packageDetails);
     const packageDate = packageDetails.pack_start_date;
     // Specific date
     const specificDate = new Date(packageDate);
@@ -51,7 +55,7 @@ export const validationCheck = async (req, res) => {
 
     // Convert in Days Unit
     const differenceInDays = Math.ceil(Math.abs(differenceInMilliseconds) / (1000 * 60 * 60 * 24));
-
+    console.log(differenceInDays);
     if (differenceInDays > 28) {
       await users.findByIdAndUpdate(
         _id,
